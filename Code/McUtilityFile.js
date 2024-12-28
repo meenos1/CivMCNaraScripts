@@ -352,7 +352,7 @@ function getYawPitchFromCoords(xPos,zPos,yPos){
 
 //change direction of looking gradually in order to not activate
 //anticheat kick. Taken from HG_80
-function smoothLookAt(yaw, pitch){
+function smoothLookAt(yaw, pitch, tolerance = 0.1){
  // interpolation
     const lerp = (a, b, f) => {
         return a + f * (b - a);
@@ -397,7 +397,7 @@ function smoothLookAt(yaw, pitch){
     const roundedYaw = round(yaw, 1);
     const roundedPitch = round(pitch, 1);
 
-    while (round(currYaw, 1) !== roundedYaw || round(plyr.getPitch(), 1) !== roundedPitch) {
+    while ((Math.abs(currYaw-roundedYaw)>tolerance) || (Math.abs(currPitch-pitch)>tolerance )) {
         if (currYaw !== yaw) {
             currYaw = lerp(currYaw, yaw, 0.1); // defines how smooth you want it (0.5 in third parameter would be 100% of the angle in 2 ms, in theory)
         }
