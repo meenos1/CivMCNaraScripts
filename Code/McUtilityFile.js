@@ -341,7 +341,7 @@ function getYawPitchFromCoords(xPos,zPos,yPos){
     
     delX = xPos - plX
     delZ = zPos - plZ
-    delY = yPos - plY
+    delY = yPos - plY + 1.62 //Player head is 1.62 blocks above yPos
     
     distance = Math.sqrt((delZ * delZ) + (delX * delX))
     pitch = Math.atan2(delY,distance) * 180/Math.PI
